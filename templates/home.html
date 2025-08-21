@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero bg-hero text-light rounded-4 p-5 mb-4 shadow-sm">
+  <div class="row align-items-center">
+    <div class="col-lg-7">
+      <h1 class="display-5 fw-bold">寻失物 · 传温暖</h1>
+      <p class="lead mt-3">在这里发布或寻找失物/招领信息，留言与私信帮助物归原主。</p>
+      <div class="mt-4">
+        <a href="/items/create/" class="btn btn-warning btn-lg me-2"><i class="bi bi-plus-circle"></i> 发布信息</a>
+        <a href="/items/" class="btn btn-outline-light btn-lg"><i class="bi bi-search"></i> 浏览物品</a>
+      </div>
+    </div>
+    <div class="col-lg-5 text-center d-none d-lg-block">
+      <img src="/static/img/hero.svg" class="img-fluid" alt="hero">
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="h4 mb-0">最新发布</h2>
+    <a class="text-decoration-none" href="/items/">查看全部 →</a>
+  </div>
+  {% include 'items/items_latest_items.html' %}
+</section>
+{% endblock %}

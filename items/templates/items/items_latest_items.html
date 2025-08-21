@@ -1,0 +1,17 @@
+<div class="row g-3">
+  {% for it in latest %}
+    <div class="col-md-3">
+      <div class="card h-100 card-hover">
+        {% if it.image %}<img src="{{ it.image.url }}" class="card-img-top" style="height: 150px; object-fit: cover;" alt="">{% endif %}
+        <div class="card-body">
+          <span class="badge bg-{% if it.category == 'lost' %}danger{% else %}success{% endif %} mb-2">{{ it.get_category_display }}</span>
+          <h6 class="card-title mb-1">{{ it.title }}</h6>
+          <div class="text-muted small mb-2">{{ it.location }} · {{ it.occurred_at|date:"m-d H:i" }}</div>
+          <a href="{% url 'items:detail' it.id %}" class="btn btn-sm btn-outline-light">查看</a>
+        </div>
+      </div>
+    </div>
+  {% empty %}
+    <div class="text-muted">暂无发布</div>
+  {% endfor %}
+</div>

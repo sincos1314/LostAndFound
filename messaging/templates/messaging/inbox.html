@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="card shadow-sm">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <div><i class="bi bi-inbox"></i> 私信</div>
+      </div>
+      <div class="list-group list-group-flush">
+        {% for x in conv_list %}
+          <a href="{% url 'messaging:room' x.conv.id %}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+            <div class="me-3">
+              <div class="fw-semibold">{{ x.other.username }}</div>
+              <div class="text-muted small">
+                {% if x.last %}
+                  {% if x.last.content %}{{ x.last.content|truncatechars:36 }}{% elif x.last.image %}[图片]{% else %}[无内容]{% endif %}
+                {% else %}
+                  还没有消息，打个招呼吧～
+                {% endif %}
+              </div>
+            </div>
+            <div class="text-end">
+              {% if x.last %}
+                <div class="text-muted small">{{ x.last.created_at|date:"Y-m-d H:i" }}</div>
+              {% endif %}
+              {% if x.unread > 0 %}
+                <span class="badge rounded-pill bg-danger">{{ x.unread }}</span>
+              {% endif %}
+            </div>
+          </a>
+        {% empty %}
+          <div class="p-4 text-center text-muted">暂无会话</div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

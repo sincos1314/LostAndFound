@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row g-4">
+  <div class="col-lg-4">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">个人信息</h5>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><strong>用户名：</strong>{{ user.username }}</li>
+          <li class="list-group-item"><strong>学号：</strong>{{ prof.student_id }}</li>
+          <li class="list-group-item"><strong>学院：</strong>{{ prof.college }}</li>
+          <li class="list-group-item"><strong>班级：</strong>{{ prof.class_name }}</li>
+          <li class="list-group-item"><strong>性别：</strong>{% if prof.gender == 'M' %}男{% elif prof.gender == 'F' %}女{% else %}其他{% endif %}</li>
+          <li class="list-group-item"><strong>邮箱：</strong>{{ user.email|default:"未绑定" }}</li>
+          <li class="list-group-item"><strong>手机号：</strong>{{ prof.phone|default:"未绑定" }}</li>
+        </ul>
+        <a href="{% url 'accounts:edit_profile' %}" class="btn btn-primary mt-3 w-100"><i class="bi bi-pencil-square"></i> 修改信息</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-8">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <h5 class="mb-0">我发布的寻物/招领</h5>
+      <a href="/items/create/" class="btn btn-outline-primary btn-sm"><i class="bi bi-plus-circle"></i> 发布新信息</a>
+    </div>
+    <div class="row g-3">
+      {% for it in my_items %}
+        <div class="col-md-6">
+          <div class="card h-100 card-hover">
+            {% if it.image %}<img src="{{ it.image.url }}" class="card-img-top" style="height: 160px; object-fit: cover;" alt="">{% endif %}
+            <div class="card-body">
+              <span class="badge bg-{% if it.category == 'lost' %}danger{% else %}success{% endif %} mb-2">{{ it.get_category_display }}</span>
+              <h5 class="card-title">{{ it.title }}</h5>
+              <p class="card-text text-muted small mb-2">{{ it.location }} · {{ it.occurred_at|date:"Y-m-d H:i" }}</p>
+              <p class="card-text">{{ it.description|truncatechars:60 }}</p>
+              <a class="btn btn-sm btn-outline-secondary" href="{% url 'items:detail' it.id %}">查看</a>
+              <a class="btn btn-sm btn-outline-primary" href="{% url 'items:edit' it.id %}">编辑</a>
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <div class="text-muted">还没有发布任何信息，去发布一个吧！</div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

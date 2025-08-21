@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <h2 class="h5 mb-3">发布寻物/招领信息</h2>
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button class="btn btn-primary">发布</button>
+          <a class="btn btn-outline-secondary" href="{% url 'items:list' %}">返回</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
