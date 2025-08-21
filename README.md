@@ -1,7 +1,5 @@
 # LostAndFound 校园失物招领平台
 
-[简体中文]
-
 一套基于 Django + Bootstrap 的校园失物招领平台。支持发布寻物/招领、搜索筛选、评论、站内私信、未读消息提醒等功能，适合作为课程项目或内部工具快速落地。
 
 - 主要技术：Django 5 · Python 3.12 · Bootstrap 5
@@ -43,8 +41,8 @@
 
 ```bash
 # 1) 克隆仓库
-git clone https://github.com/<your-name>/<your-repo>.git
-cd <your-repo>
+git clone https://github.com/sincos1314/LostAndFound
+cd LostAndFound
 
 # 2) 创建并激活虚拟环境
 # Windows
@@ -67,6 +65,9 @@ python manage.py createsuperuser
 # 6) 启动开发服务器
 python manage.py runserver
 # 访问 http://127.0.0.1:8000/
+
+# 7) 进入管理后台
+# 访问 http://127.0.0.1:8000/admmin
 ```
 
 ---
@@ -154,59 +155,6 @@ ALLOWED_HOSTS=127.0.0.1,localhost
 
 ---
 
-## 将项目发布到 GitHub 🚀
-
-首次发布：
-
-```bash
-# 初始化仓库（在项目根目录）
-git init
-git add .
-git commit -m "chore: initial commit"
-git branch -M main
-
-# 创建远程仓库（在 GitHub 网站上创建后，替换下行 URL）
-git remote add origin https://github.com/<your-name>/<your-repo>.git
-
-# 推送
-git push -u origin main
-```
-
-后续更新：
-
-```bash
-git add .
-git commit -m "feat: messaging inbox with unread badges"
-git push
-```
-
-建议在仓库根目录包含以下 .gitignore（节选）：
-
-```
-# Python / Django
-__pycache__/
-*.py[cod]
-*.egg-info/
-db.sqlite3
-media/
-staticfiles/
-*.log
-
-# Envs
-.env
-.env.*
-venv/
-.venv/
-
-# IDE / OS
-.vscode/
-.idea/
-.DS_Store
-Thumbs.db
-```
-
----
-
 ## 常见问题与排错 🐛
 
 - 静态资源 404（如 hero.svg）
@@ -229,39 +177,6 @@ Thumbs.db
     'messaging.context_processors.unread_totals',
     ```
   - 确保用户已登录且确有未读消息（对方发给我）
-
----
-
-## 生产部署要点 📦
-
-- 环境变量
-  - `DEBUG=False`
-  - `ALLOWED_HOSTS=你的域名或服务器IP`
-  - `SECRET_KEY=安全随机串`
-- 静态资源
-  ```bash
-  python manage.py collectstatic
-  ```
-- 服务
-  - Linux：gunicorn/uvicorn + Nginx
-  - Windows：Waitress/IIS
-- 数据库
-  - 建议使用 PostgreSQL 或 MySQL
-
----
-
-## 代码规范与提交信息 ✍️
-
-- 提交信息建议使用语义化前缀：
-  - feat: 新功能
-  - fix: 修复
-  - chore: 杂项/配置
-  - docs: 文档
-  - refactor: 重构
-- 可选：添加 `.gitattributes` 统一换行符
-  ```
-  * text=auto
-  ```
 
 ---
 
